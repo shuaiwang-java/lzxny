@@ -1,0 +1,13 @@
+	1,pom导入相应的包
+	2,配置web.xml;
+	3,配置spring-mvc.xml;appliactionContext.xml(spring)
+	4,配置文件完成后开始建表
+		user 用户
+		role 角色
+		permission 权限
+	5,添加mbg.xml文件，编写测试类生成mapper,bean,dao
+	6,编写login.jsp  使用ajax访问loginController
+	7,成功后在login.jsp界面访问loginController的首页action
+	
+	
+	

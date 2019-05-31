@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.pValMapper">
+  <resultMap id="BaseResultMap" type="com.bean.pVal">
+    <id column="pushId" jdbcType="INTEGER" property="pushid" />
+    <result column="ch4" jdbcType="REAL" property="ch4" />
+    <result column="o2" jdbcType="REAL" property="o2" />
+    <result column="kpa" jdbcType="REAL" property="kpa" />
+    <result column="hz" jdbcType="REAL" property="hz" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pushId, ch4, o2, kpa, hz
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.pValExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <!-- 查询报警参数值 -->
+  <select id="selectVal" resultMap="BaseResultMap">
+  		select * from pval order by pushId desc  limit 1
+  </select>
+  
+  <!-- 查询所有电话号码 -->
+  <select id="getPhone" resultType="java.lang.String">
+  		select pUserNamePhone from pval_user
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pval
+    where pushId = #{pushid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pval
+    where pushId = #{pushid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.pValExample">
+    delete from pval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.pVal">
+    insert into pval (pushId, ch4, o2, kpa, 
+      hz)
+    values (#{pushid,jdbcType=INTEGER}, #{ch4,jdbcType=REAL}, #{o2,jdbcType=REAL}, #{kpa,jdbcType=REAL}, 
+      #{hz,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.pVal">
+    insert into pval
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pushid != null">
+        pushId,
+      </if>
+      <if test="ch4 != null">
+        ch4,
+      </if>
+      <if test="o2 != null">
+        o2,
+      </if>
+      <if test="kpa != null">
+        kpa,
+      </if>
+      <if test="hz != null">
+        hz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pushid != null">
+        #{pushid,jdbcType=INTEGER},
+      </if>
+      <if test="ch4 != null">
+        #{ch4,jdbcType=REAL},
+      </if>
+      <if test="o2 != null">
+        #{o2,jdbcType=REAL},
+      </if>
+      <if test="kpa != null">
+        #{kpa,jdbcType=REAL},
+      </if>
+      <if test="hz != null">
+        #{hz,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.pValExample" resultType="java.lang.Long">
+    select count(*) from pval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pval
+    <set>
+      <if test="record.pushid != null">
+        pushId = #{record.pushid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ch4 != null">
+        ch4 = #{record.ch4,jdbcType=REAL},
+      </if>
+      <if test="record.o2 != null">
+        o2 = #{record.o2,jdbcType=REAL},
+      </if>
+      <if test="record.kpa != null">
+        kpa = #{record.kpa,jdbcType=REAL},
+      </if>
+      <if test="record.hz != null">
+        hz = #{record.hz,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pval
+    set pushId = #{record.pushid,jdbcType=INTEGER},
+      ch4 = #{record.ch4,jdbcType=REAL},
+      o2 = #{record.o2,jdbcType=REAL},
+      kpa = #{record.kpa,jdbcType=REAL},
+      hz = #{record.hz,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.pVal">
+    update pval
+    <set>
+      <if test="ch4 != null">
+        ch4 = #{ch4,jdbcType=REAL},
+      </if>
+      <if test="o2 != null">
+        o2 = #{o2,jdbcType=REAL},
+      </if>
+      <if test="kpa != null">
+        kpa = #{kpa,jdbcType=REAL},
+      </if>
+      <if test="hz != null">
+        hz = #{hz,jdbcType=REAL},
+      </if>
+    </set>
+    where pushId = #{pushid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.pVal">
+    update pval
+    set ch4 = #{ch4,jdbcType=REAL},
+      o2 = #{o2,jdbcType=REAL},
+      kpa = #{kpa,jdbcType=REAL},
+      hz = #{hz,jdbcType=REAL}
+    where pushId = #{pushid,jdbcType=INTEGER}
+  </update>
+</mapper>

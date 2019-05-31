@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.WXdataMapper">
+  <resultMap id="BaseResultMap" type="com.bean.WXdata">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dateData" jdbcType="TIMESTAMP" property="datedata" />
+    <result column="obja" jdbcType="REAL" property="obja" />
+    <result column="objb" jdbcType="REAL" property="objb" />
+    <result column="objc" jdbcType="REAL" property="objc" />
+    <result column="objd" jdbcType="REAL" property="objd" />
+    <result column="obje" jdbcType="REAL" property="obje" />
+    <result column="objf" jdbcType="REAL" property="objf" />
+    <result column="objg" jdbcType="REAL" property="objg" />
+    <result column="objh" jdbcType="REAL" property="objh" />
+    <result column="obji" jdbcType="REAL" property="obji" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dateData, obja, objb, objc, objd, obje, objf, objg, objh, obji
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.WXdataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wxdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wxdata
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getDataLimit" resultMap="BaseResultMap">
+     select * from wxdata order by id DESC limit 1
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wxdata
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.WXdataExample">
+    delete from wxdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.WXdata">
+    insert into wxdata (id, dateData, obja, 
+      objb, objc, objd, obje, 
+      objf, objg, objh, obji
+      )
+    values (#{id,jdbcType=INTEGER}, #{datedata,jdbcType=TIMESTAMP}, #{obja,jdbcType=REAL}, 
+      #{objb,jdbcType=REAL}, #{objc,jdbcType=REAL}, #{objd,jdbcType=REAL}, #{obje,jdbcType=REAL}, 
+      #{objf,jdbcType=REAL}, #{objg,jdbcType=REAL}, #{objh,jdbcType=REAL}, #{obji,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.WXdata">
+    insert into wxdata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="datedata != null">
+        dateData,
+      </if>
+      <if test="obja != null">
+        obja,
+      </if>
+      <if test="objb != null">
+        objb,
+      </if>
+      <if test="objc != null">
+        objc,
+      </if>
+      <if test="objd != null">
+        objd,
+      </if>
+      <if test="obje != null">
+        obje,
+      </if>
+      <if test="objf != null">
+        objf,
+      </if>
+      <if test="objg != null">
+        objg,
+      </if>
+      <if test="objh != null">
+        objh,
+      </if>
+      <if test="obji != null">
+        obji,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="datedata != null">
+        #{datedata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obja != null">
+        #{obja,jdbcType=REAL},
+      </if>
+      <if test="objb != null">
+        #{objb,jdbcType=REAL},
+      </if>
+      <if test="objc != null">
+        #{objc,jdbcType=REAL},
+      </if>
+      <if test="objd != null">
+        #{objd,jdbcType=REAL},
+      </if>
+      <if test="obje != null">
+        #{obje,jdbcType=REAL},
+      </if>
+      <if test="objf != null">
+        #{objf,jdbcType=REAL},
+      </if>
+      <if test="objg != null">
+        #{objg,jdbcType=REAL},
+      </if>
+      <if test="objh != null">
+        #{objh,jdbcType=REAL},
+      </if>
+      <if test="obji != null">
+        #{obji,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.WXdataExample" resultType="java.lang.Long">
+    select count(*) from wxdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wxdata
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.datedata != null">
+        dateData = #{record.datedata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.obja != null">
+        obja = #{record.obja,jdbcType=REAL},
+      </if>
+      <if test="record.objb != null">
+        objb = #{record.objb,jdbcType=REAL},
+      </if>
+      <if test="record.objc != null">
+        objc = #{record.objc,jdbcType=REAL},
+      </if>
+      <if test="record.objd != null">
+        objd = #{record.objd,jdbcType=REAL},
+      </if>
+      <if test="record.obje != null">
+        obje = #{record.obje,jdbcType=REAL},
+      </if>
+      <if test="record.objf != null">
+        objf = #{record.objf,jdbcType=REAL},
+      </if>
+      <if test="record.objg != null">
+        objg = #{record.objg,jdbcType=REAL},
+      </if>
+      <if test="record.objh != null">
+        objh = #{record.objh,jdbcType=REAL},
+      </if>
+      <if test="record.obji != null">
+        obji = #{record.obji,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wxdata
+    set id = #{record.id,jdbcType=INTEGER},
+      dateData = #{record.datedata,jdbcType=TIMESTAMP},
+      obja = #{record.obja,jdbcType=REAL},
+      objb = #{record.objb,jdbcType=REAL},
+      objc = #{record.objc,jdbcType=REAL},
+      objd = #{record.objd,jdbcType=REAL},
+      obje = #{record.obje,jdbcType=REAL},
+      objf = #{record.objf,jdbcType=REAL},
+      objg = #{record.objg,jdbcType=REAL},
+      objh = #{record.objh,jdbcType=REAL},
+      obji = #{record.obji,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.WXdata">
+    update wxdata
+    <set>
+      <if test="datedata != null">
+        dateData = #{datedata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obja != null">
+        obja = #{obja,jdbcType=REAL},
+      </if>
+      <if test="objb != null">
+        objb = #{objb,jdbcType=REAL},
+      </if>
+      <if test="objc != null">
+        objc = #{objc,jdbcType=REAL},
+      </if>
+      <if test="objd != null">
+        objd = #{objd,jdbcType=REAL},
+      </if>
+      <if test="obje != null">
+        obje = #{obje,jdbcType=REAL},
+      </if>
+      <if test="objf != null">
+        objf = #{objf,jdbcType=REAL},
+      </if>
+      <if test="objg != null">
+        objg = #{objg,jdbcType=REAL},
+      </if>
+      <if test="objh != null">
+        objh = #{objh,jdbcType=REAL},
+      </if>
+      <if test="obji != null">
+        obji = #{obji,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.WXdata">
+    update wxdata
+    set dateData = #{datedata,jdbcType=TIMESTAMP},
+      obja = #{obja,jdbcType=REAL},
+      objb = #{objb,jdbcType=REAL},
+      objc = #{objc,jdbcType=REAL},
+      objd = #{objd,jdbcType=REAL},
+      obje = #{obje,jdbcType=REAL},
+      objf = #{objf,jdbcType=REAL},
+      objg = #{objg,jdbcType=REAL},
+      objh = #{objh,jdbcType=REAL},
+      obji = #{obji,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

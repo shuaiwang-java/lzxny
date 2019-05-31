@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.ShiroDao">
+	<resultMap id="BaseResultMap" type="com.bean.Permission">
+    <id column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="pUrl" jdbcType="VARCHAR" property="purl" />
+    <result column="pDescription" jdbcType="VARCHAR" property="pdescription" />
+  	</resultMap>
+
+    <select id="getUserByUserName" resultType="com.bean.User">   <!-- 根据用户名获取到user -->
+        select * FROM user
+        WHERE uName = #{0}
+    </select>
+
+    <select id="getUserRoleByUserId" resultType="int">
+       select u.role_Id from user u where u.uId=  #{0}
+    </select>
+    
+    <select id="getVal" resultMap="BaseResultMap">
+       select * from user where uId= #{0}
+    </select>
+
+    <select id="getPermissionsByRoleId" resultMap="BaseResultMap">
+        select p.pId,p.pUrl,p.pDescription  from permission p,role_permission rp where p.pId=rp.pId and rp.rId=#{0}
+    </select>
+
+</mapper>

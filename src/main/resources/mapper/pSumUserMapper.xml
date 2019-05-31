@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.pSumUserMapper">
+  <resultMap id="BaseResultMap" type="com.bean.pSumUser">
+    <id column="pUserId" jdbcType="INTEGER" property="puserid" />
+    <id column="pUserName" jdbcType="VARCHAR" property="pusername" />
+    <result column="pUserPhone" jdbcType="VARCHAR" property="puserphone" />
+    <result column="pUserDept" jdbcType="VARCHAR" property="puserdept" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pUserId, pUserName, pUserPhone, pUserDept
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.pSumUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from psum_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.bean.pSumUserKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from psum_user
+    where pUserId = #{puserid,jdbcType=INTEGER}
+      and pUserName = #{pusername,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.bean.pSumUserKey">
+    delete from psum_user
+    where pUserId = #{puserid,jdbcType=INTEGER}
+      and pUserName = #{pusername,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.pSumUserExample">
+    delete from psum_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+    <!-- push添加user -->
+  <select id="addpvUser" >
+  		insert into psum_user (pUserName,pUserPhone,pUserDept) values(#{0},#{1},#{2})
+  </select>
+  
+  <delete id="deleteUserById">
+  	delete from psum_user where pUserId=#{0}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.pSumUser">
+    insert into psum_user (pUserId, pUserName, pUserPhone, 
+      pUserDept)
+    values (#{puserid,jdbcType=INTEGER}, #{pusername,jdbcType=VARCHAR}, #{puserphone,jdbcType=VARCHAR}, 
+      #{puserdept,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.pSumUser">
+    insert into psum_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="puserid != null">
+        pUserId,
+      </if>
+      <if test="pusername != null">
+        pUserName,
+      </if>
+      <if test="puserphone != null">
+        pUserPhone,
+      </if>
+      <if test="puserdept != null">
+        pUserDept,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="puserid != null">
+        #{puserid,jdbcType=INTEGER},
+      </if>
+      <if test="pusername != null">
+        #{pusername,jdbcType=VARCHAR},
+      </if>
+      <if test="puserphone != null">
+        #{puserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="puserdept != null">
+        #{puserdept,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.pSumUserExample" resultType="java.lang.Long">
+    select count(*) from psum_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update psum_user
+    <set>
+      <if test="record.puserid != null">
+        pUserId = #{record.puserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pusername != null">
+        pUserName = #{record.pusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puserphone != null">
+        pUserPhone = #{record.puserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puserdept != null">
+        pUserDept = #{record.puserdept,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update psum_user
+    set pUserId = #{record.puserid,jdbcType=INTEGER},
+      pUserName = #{record.pusername,jdbcType=VARCHAR},
+      pUserPhone = #{record.puserphone,jdbcType=VARCHAR},
+      pUserDept = #{record.puserdept,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.pSumUser">
+    update psum_user
+    <set>
+      <if test="puserphone != null">
+        pUserPhone = #{puserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="puserdept != null">
+        pUserDept = #{puserdept,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pUserId = #{puserid,jdbcType=INTEGER}
+      and pUserName = #{pusername,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.pSumUser">
+    update psum_user
+    set pUserPhone = #{puserphone,jdbcType=VARCHAR},
+      pUserDept = #{puserdept,jdbcType=VARCHAR}
+    where pUserId = #{puserid,jdbcType=INTEGER}
+      and pUserName = #{pusername,jdbcType=VARCHAR}
+  </update>
+</mapper>

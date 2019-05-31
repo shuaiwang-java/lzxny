@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FileMapper">
+  <resultMap id="BaseResultMap" type="com.bean.FileClass">
+    <id column="fId" jdbcType="INTEGER" property="fid" />
+    <result column="fName" jdbcType="VARCHAR" property="fname" />
+    <result column="fTime" jdbcType="TIMESTAMP" property="ftime" />
+    <result column="fUser" jdbcType="VARCHAR" property="fuser" />
+    <result column="fState" jdbcType="VARCHAR" property="fstate" />
+    <result column="fSize" jdbcType="VARCHAR" property="fsize" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    fId, fName, fTime, fUser, fState, fSize
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.FileClassExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    order by fId DESC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file
+    where fId = #{fid,jdbcType=INTEGER} order by fId DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from file
+    where fId = #{fid,jdbcType=INTEGER}
+  </delete>
+  <!--通过名字删除  -->
+  <delete id="deleteByfName" parameterType="java.lang.String">
+    delete from file
+    where fName = #{fname,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.FileClassExample">
+    delete from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.FileClass">
+    insert into file (fId, fName, fTime, 
+      fUser, fState, fSize
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{ftime,jdbcType=TIMESTAMP}, 
+      #{fuser,jdbcType=VARCHAR}, #{fstate,jdbcType=VARCHAR}, #{fsize,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.FileClass">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fId,
+      </if>
+      <if test="fname != null">
+        fName,
+      </if>
+      <if test="ftime != null">
+        fTime,
+      </if>
+      <if test="fuser != null">
+        fUser,
+      </if>
+      <if test="fstate != null">
+        fState,
+      </if>
+      <if test="fsize != null">
+        fSize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null">
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftime != null">
+        #{ftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fuser != null">
+        #{fuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fstate != null">
+        #{fstate,jdbcType=VARCHAR},
+      </if>
+      <if test="fsize != null">
+        #{fsize,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.FileClassExample" resultType="java.lang.Long">
+    select count(*) from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <!-- 获取到全部的共享文件 -->
+  <select id="selectByShareFile" resultMap="BaseResultMap">
+    select * from file  where file.fState=1 order by fId DESC
+  </select>
+  <!-- 获取到个人文件 -->
+  <select id="selectByfile" resultMap="BaseResultMap">
+    select * from file  where file.fState=0 order by fId DESC
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update file
+    <set>
+      <if test="record.fid != null">
+        fId = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fname != null">
+        fName = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftime != null">
+        fTime = #{record.ftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fuser != null">
+        fUser = #{record.fuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fstate != null">
+        fState = #{record.fstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsize != null">
+        fSize = #{record.fsize,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update file
+    set fId = #{record.fid,jdbcType=INTEGER},
+      fName = #{record.fname,jdbcType=VARCHAR},
+      fTime = #{record.ftime,jdbcType=TIMESTAMP},
+      fUser = #{record.fuser,jdbcType=VARCHAR},
+      fState = #{record.fstate,jdbcType=VARCHAR},
+      fSize = #{record.fsize,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.FileClass">
+    update file
+    <set>
+      <if test="fname != null">
+        fName = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftime != null">
+        fTime = #{ftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fuser != null">
+        fUser = #{fuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fstate != null">
+        fState = #{fstate,jdbcType=VARCHAR},
+      </if>
+      <if test="fsize != null">
+        fSize = #{fsize,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fId = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.FileClass">
+    update file
+    set fName = #{fname,jdbcType=VARCHAR},
+      fTime = #{ftime,jdbcType=TIMESTAMP},
+      fUser = #{fuser,jdbcType=VARCHAR},
+      fState = #{fstate,jdbcType=VARCHAR},
+      fSize = #{fsize,jdbcType=VARCHAR}
+    where fId = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

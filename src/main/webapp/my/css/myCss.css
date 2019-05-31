@@ -1,0 +1,23 @@
+@charset "UTF-8";
+ /* .代表class #代表id */
+ .tableClass{
+ 	background-color:#07000038;
+	position:absolute;   /* 固 */
+	color: #a2c1fa;
+ }
+ table
+  {
+  border-collapse:collapse;
+  }
+table, td, th
+  {
+  border:1px solid #f36560;
+  height:23px;
+  width:120px;
+  text-align:center;
+  }
+.buttonClass{
+	border-radius: 13px; /* 边框弧度 */ 
+    position: absolute;
+    border: 1px solid red;
+}

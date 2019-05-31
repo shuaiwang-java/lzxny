@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.YjMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Yj">
+    <id column="yId" jdbcType="INTEGER" property="yid" />
+    <result column="date1" jdbcType="VARCHAR" property="date1" />
+    <result column="time1" jdbcType="VARCHAR" property="time1" />
+    <result column="c" jdbcType="REAL" property="c" />
+    <result column="qt" jdbcType="REAL" property="qt" />
+    <result column="ch" jdbcType="REAL" property="ch" />
+    <result column="o2" jdbcType="REAL" property="o2" />
+    <result column="fq" jdbcType="REAL" property="fq" />
+    <result column="a_20" jdbcType="REAL" property="a20" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <!--  -->
+  <select id="selectByDate1" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from yj where date1 = #{date,jdbcType=VARCHAR};
+  </select>
+  
+  <sql id="Base_Column_List">
+    yId, date1, time1, c, qt, ch, o2, fq, a_20
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.YjExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from yj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yj
+    where yId = #{yid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yj
+    where yId = #{yid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.YjExample">
+    delete from yj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Yj">
+    insert into yj (yId, date1, time1, 
+      c, qt, ch, o2, 
+      fq, a_20)
+    values (#{yid,jdbcType=INTEGER}, #{date1,jdbcType=VARCHAR}, #{time1,jdbcType=VARCHAR}, 
+      #{c,jdbcType=REAL}, #{qt,jdbcType=REAL}, #{ch,jdbcType=REAL}, #{o2,jdbcType=REAL}, 
+      #{fq,jdbcType=REAL}, #{a20,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Yj">
+    insert into yj
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="yid != null">
+        yId,
+      </if>
+      <if test="date1 != null">
+        date1,
+      </if>
+      <if test="time1 != null">
+        time1,
+      </if>
+      <if test="c != null">
+        c,
+      </if>
+      <if test="qt != null">
+        qt,
+      </if>
+      <if test="ch != null">
+        ch,
+      </if>
+      <if test="o2 != null">
+        o2,
+      </if>
+      <if test="fq != null">
+        fq,
+      </if>
+      <if test="a20 != null">
+        a_20,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="yid != null">
+        #{yid,jdbcType=INTEGER},
+      </if>
+      <if test="date1 != null">
+        #{date1,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null">
+        #{time1,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null">
+        #{c,jdbcType=REAL},
+      </if>
+      <if test="qt != null">
+        #{qt,jdbcType=REAL},
+      </if>
+      <if test="ch != null">
+        #{ch,jdbcType=REAL},
+      </if>
+      <if test="o2 != null">
+        #{o2,jdbcType=REAL},
+      </if>
+      <if test="fq != null">
+        #{fq,jdbcType=REAL},
+      </if>
+      <if test="a20 != null">
+        #{a20,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.YjExample" resultType="java.lang.Long">
+    select count(*) from yj
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update yj
+    <set>
+      <if test="record.yid != null">
+        yId = #{record.yid,jdbcType=INTEGER},
+      </if>
+      <if test="record.date1 != null">
+        date1 = #{record.date1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time1 != null">
+        time1 = #{record.time1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c != null">
+        c = #{record.c,jdbcType=REAL},
+      </if>
+      <if test="record.qt != null">
+        qt = #{record.qt,jdbcType=REAL},
+      </if>
+      <if test="record.ch != null">
+        ch = #{record.ch,jdbcType=REAL},
+      </if>
+      <if test="record.o2 != null">
+        o2 = #{record.o2,jdbcType=REAL},
+      </if>
+      <if test="record.fq != null">
+        fq = #{record.fq,jdbcType=REAL},
+      </if>
+      <if test="record.a20 != null">
+        a_20 = #{record.a20,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update yj
+    set yId = #{record.yid,jdbcType=INTEGER},
+      date1 = #{record.date1,jdbcType=VARCHAR},
+      time1 = #{record.time1,jdbcType=VARCHAR},
+      c = #{record.c,jdbcType=REAL},
+      qt = #{record.qt,jdbcType=REAL},
+      ch = #{record.ch,jdbcType=REAL},
+      o2 = #{record.o2,jdbcType=REAL},
+      fq = #{record.fq,jdbcType=REAL},
+      a_20 = #{record.a20,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.Yj">
+    update yj
+    <set>
+      <if test="date1 != null">
+        date1 = #{date1,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null">
+        time1 = #{time1,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null">
+        c = #{c,jdbcType=REAL},
+      </if>
+      <if test="qt != null">
+        qt = #{qt,jdbcType=REAL},
+      </if>
+      <if test="ch != null">
+        ch = #{ch,jdbcType=REAL},
+      </if>
+      <if test="o2 != null">
+        o2 = #{o2,jdbcType=REAL},
+      </if>
+      <if test="fq != null">
+        fq = #{fq,jdbcType=REAL},
+      </if>
+      <if test="a20 != null">
+        a_20 = #{a20,jdbcType=REAL},
+      </if>
+    </set>
+    where yId = #{yid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.Yj">
+    update yj
+    set date1 = #{date1,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=VARCHAR},
+      c = #{c,jdbcType=REAL},
+      qt = #{qt,jdbcType=REAL},
+      ch = #{ch,jdbcType=REAL},
+      o2 = #{o2,jdbcType=REAL},
+      fq = #{fq,jdbcType=REAL},
+      a_20 = #{a20,jdbcType=REAL}
+    where yId = #{yid,jdbcType=INTEGER}
+  </update>
+</mapper>

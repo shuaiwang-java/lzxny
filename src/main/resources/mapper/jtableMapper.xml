@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.jtableMapper">
+  <resultMap id="BaseResultMap" type="com.bean.jtable">
+    <result column="ti" jdbcType="TIMESTAMP" property="ti" />
+    <result column="a1" jdbcType="REAL" property="a1" />
+    <result column="a2" jdbcType="REAL" property="a2" />
+    <result column="a3" jdbcType="REAL" property="a3" />
+    <result column="a4" jdbcType="REAL" property="a4" />
+    <result column="b1" jdbcType="REAL" property="b1" />
+    <result column="b2" jdbcType="REAL" property="b2" />
+    <result column="b3" jdbcType="REAL" property="b3" />
+    <result column="b4" jdbcType="REAL" property="b4" />
+    <result column="c1" jdbcType="REAL" property="c1" />
+    <result column="c2" jdbcType="REAL" property="c2" />
+    <result column="c3" jdbcType="REAL" property="c3" />
+    <result column="c4" jdbcType="REAL" property="c4" />
+    <result column="d1" jdbcType="REAL" property="d1" />
+    <result column="d2" jdbcType="REAL" property="d2" />
+    <result column="d3" jdbcType="REAL" property="d3" />
+    <result column="d4" jdbcType="REAL" property="d4" />
+    <result column="e1" jdbcType="REAL" property="e1" />
+    <result column="e2" jdbcType="REAL" property="e2" />
+    <result column="e3" jdbcType="REAL" property="e3" />
+    <result column="e4" jdbcType="REAL" property="e4" />
+    <result column="f1" jdbcType="REAL" property="f1" />
+    <result column="f2" jdbcType="REAL" property="f2" />
+    <result column="f3" jdbcType="REAL" property="f3" />
+    <result column="f4" jdbcType="REAL" property="f4" />
+    <result column="g1" jdbcType="REAL" property="g1" />
+    <result column="g2" jdbcType="REAL" property="g2" />
+    <result column="g3" jdbcType="REAL" property="g3" />
+    <result column="g4" jdbcType="REAL" property="g4" />
+    <result column="h1" jdbcType="REAL" property="h1" />
+    <result column="h2" jdbcType="REAL" property="h2" />
+    <result column="h3" jdbcType="REAL" property="h3" />
+    <result column="h4" jdbcType="REAL" property="h4" />
+    <result column="i1" jdbcType="REAL" property="i1" />
+    <result column="i2" jdbcType="REAL" property="i2" />
+    <result column="i3" jdbcType="REAL" property="i3" />
+    <result column="i4" jdbcType="REAL" property="i4" />
+    <result column="j1" jdbcType="REAL" property="j1" />
+    <result column="j2" jdbcType="REAL" property="j2" />
+    <result column="j3" jdbcType="REAL" property="j3" />
+    <result column="j4" jdbcType="REAL" property="j4" />
+    <result column="k1" jdbcType="REAL" property="k1" />
+    <result column="k2" jdbcType="REAL" property="k2" />
+    <result column="k3" jdbcType="REAL" property="k3" />
+    <result column="k4" jdbcType="REAL" property="k4" />
+    <result column="l1" jdbcType="REAL" property="l1" />
+    <result column="l2" jdbcType="REAL" property="l2" />
+    <result column="l3" jdbcType="REAL" property="l3" />
+    <result column="l4" jdbcType="REAL" property="l4" />
+    <result column="m1" jdbcType="REAL" property="m1" />
+    <result column="m2" jdbcType="REAL" property="m2" />
+    <result column="m3" jdbcType="REAL" property="m3" />
+    <result column="m4" jdbcType="REAL" property="m4" />
+    <result column="n1" jdbcType="REAL" property="n1" />
+    <result column="n2" jdbcType="REAL" property="n2" />
+    <result column="n3" jdbcType="REAL" property="n3" />
+    <result column="n4" jdbcType="REAL" property="n4" />
+    <result column="o1" jdbcType="REAL" property="o1" />
+    <result column="o2" jdbcType="REAL" property="o2" />
+    <result column="o3" jdbcType="REAL" property="o3" />
+    <result column="o4" jdbcType="REAL" property="o4" />
+    <result column="p1" jdbcType="REAL" property="p1" />
+    <result column="p2" jdbcType="REAL" property="p2" />
+    <result column="p3" jdbcType="REAL" property="p3" />
+    <result column="p4" jdbcType="REAL" property="p4" />
+    <result column="q1" jdbcType="REAL" property="q1" />
+    <result column="q2" jdbcType="REAL" property="q2" />
+    <result column="q3" jdbcType="REAL" property="q3" />
+    <result column="q4" jdbcType="REAL" property="q4" />
+    <result column="r1" jdbcType="REAL" property="r1" />
+    <result column="r2" jdbcType="REAL" property="r2" />
+    <result column="r3" jdbcType="REAL" property="r3" />
+    <result column="r4" jdbcType="REAL" property="r4" />
+    <result column="s1" jdbcType="REAL" property="s1" />
+    <result column="s2" jdbcType="REAL" property="s2" />
+    <result column="s3" jdbcType="REAL" property="s3" />
+    <result column="s4" jdbcType="REAL" property="s4" />
+    <result column="t1" jdbcType="REAL" property="t1" />
+    <result column="t2" jdbcType="REAL" property="t2" />
+    <result column="t3" jdbcType="REAL" property="t3" />
+    <result column="t4" jdbcType="REAL" property="t4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ti, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, d3, d4, e1, e2, e3, e4, 
+    f1, f2, f3, f4, g1, g2, g3, g4, h1, h2, h3, h4, i1, i2, i3, i4, j1, j2, j3, j4, k1, 
+    k2, k3, k4, l1, l2, l3, l4, m1, m2, m3, m4, n1, n2, n3, n4, o1, o2, o3, o4, p1, p2, 
+    p3, p4, q1, q2, q3, q4, r1, r2, r3, r4, s1, s2, s3, s4, t1, t2, t3, t4
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.jtableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jtable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bean.jtableExample">
+    delete from jtable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.jtable">
+    insert into jtable (ti, a1, a2, a3, 
+      a4, b1, b2, b3, 
+      b4, c1, c2, c3, 
+      c4, d1, d2, d3, 
+      d4, e1, e2, e3, 
+      e4, f1, f2, f3, 
+      f4, g1, g2, g3, 
+      g4, h1, h2, h3, 
+      h4, i1, i2, i3, 
+      i4, j1, j2, j3, 
+      j4, k1, k2, k3, 
+      k4, l1, l2, l3, 
+      l4, m1, m2, m3, 
+      m4, n1, n2, n3, 
+      n4, o1, o2, o3, 
+      o4, p1, p2, p3, 
+      p4, q1, q2, q3, 
+      q4, r1, r2, r3, 
+      r4, s1, s2, s3, 
+      s4, t1, t2, t3, 
+      t4)
+    values (#{ti,jdbcType=TIMESTAMP}, #{a1,jdbcType=REAL}, #{a2,jdbcType=REAL}, #{a3,jdbcType=REAL}, 
+      #{a4,jdbcType=REAL}, #{b1,jdbcType=REAL}, #{b2,jdbcType=REAL}, #{b3,jdbcType=REAL}, 
+      #{b4,jdbcType=REAL}, #{c1,jdbcType=REAL}, #{c2,jdbcType=REAL}, #{c3,jdbcType=REAL}, 
+      #{c4,jdbcType=REAL}, #{d1,jdbcType=REAL}, #{d2,jdbcType=REAL}, #{d3,jdbcType=REAL}, 
+      #{d4,jdbcType=REAL}, #{e1,jdbcType=REAL}, #{e2,jdbcType=REAL}, #{e3,jdbcType=REAL}, 
+      #{e4,jdbcType=REAL}, #{f1,jdbcType=REAL}, #{f2,jdbcType=REAL}, #{f3,jdbcType=REAL}, 
+      #{f4,jdbcType=REAL}, #{g1,jdbcType=REAL}, #{g2,jdbcType=REAL}, #{g3,jdbcType=REAL}, 
+      #{g4,jdbcType=REAL}, #{h1,jdbcType=REAL}, #{h2,jdbcType=REAL}, #{h3,jdbcType=REAL}, 
+      #{h4,jdbcType=REAL}, #{i1,jdbcType=REAL}, #{i2,jdbcType=REAL}, #{i3,jdbcType=REAL}, 
+      #{i4,jdbcType=REAL}, #{j1,jdbcType=REAL}, #{j2,jdbcType=REAL}, #{j3,jdbcType=REAL}, 
+      #{j4,jdbcType=REAL}, #{k1,jdbcType=REAL}, #{k2,jdbcType=REAL}, #{k3,jdbcType=REAL}, 
+      #{k4,jdbcType=REAL}, #{l1,jdbcType=REAL}, #{l2,jdbcType=REAL}, #{l3,jdbcType=REAL}, 
+      #{l4,jdbcType=REAL}, #{m1,jdbcType=REAL}, #{m2,jdbcType=REAL}, #{m3,jdbcType=REAL}, 
+      #{m4,jdbcType=REAL}, #{n1,jdbcType=REAL}, #{n2,jdbcType=REAL}, #{n3,jdbcType=REAL}, 
+      #{n4,jdbcType=REAL}, #{o1,jdbcType=REAL}, #{o2,jdbcType=REAL}, #{o3,jdbcType=REAL}, 
+      #{o4,jdbcType=REAL}, #{p1,jdbcType=REAL}, #{p2,jdbcType=REAL}, #{p3,jdbcType=REAL}, 
+      #{p4,jdbcType=REAL}, #{q1,jdbcType=REAL}, #{q2,jdbcType=REAL}, #{q3,jdbcType=REAL}, 
+      #{q4,jdbcType=REAL}, #{r1,jdbcType=REAL}, #{r2,jdbcType=REAL}, #{r3,jdbcType=REAL}, 
+      #{r4,jdbcType=REAL}, #{s1,jdbcType=REAL}, #{s2,jdbcType=REAL}, #{s3,jdbcType=REAL}, 
+      #{s4,jdbcType=REAL}, #{t1,jdbcType=REAL}, #{t2,jdbcType=REAL}, #{t3,jdbcType=REAL}, 
+      #{t4,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.jtable">
+    insert into jtable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ti != null">
+        ti,
+      </if>
+      <if test="a1 != null">
+        a1,
+      </if>
+      <if test="a2 != null">
+        a2,
+      </if>
+      <if test="a3 != null">
+        a3,
+      </if>
+      <if test="a4 != null">
+        a4,
+      </if>
+      <if test="b1 != null">
+        b1,
+      </if>
+      <if test="b2 != null">
+        b2,
+      </if>
+      <if test="b3 != null">
+        b3,
+      </if>
+      <if test="b4 != null">
+        b4,
+      </if>
+      <if test="c1 != null">
+        c1,
+      </if>
+      <if test="c2 != null">
+        c2,
+      </if>
+      <if test="c3 != null">
+        c3,
+      </if>
+      <if test="c4 != null">
+        c4,
+      </if>
+      <if test="d1 != null">
+        d1,
+      </if>
+      <if test="d2 != null">
+        d2,
+      </if>
+      <if test="d3 != null">
+        d3,
+      </if>
+      <if test="d4 != null">
+        d4,
+      </if>
+      <if test="e1 != null">
+        e1,
+      </if>
+      <if test="e2 != null">
+        e2,
+      </if>
+      <if test="e3 != null">
+        e3,
+      </if>
+      <if test="e4 != null">
+        e4,
+      </if>
+      <if test="f1 != null">
+        f1,
+      </if>
+      <if test="f2 != null">
+        f2,
+      </if>
+      <if test="f3 != null">
+        f3,
+      </if>
+      <if test="f4 != null">
+        f4,
+      </if>
+      <if test="g1 != null">
+        g1,
+      </if>
+      <if test="g2 != null">
+        g2,
+      </if>
+      <if test="g3 != null">
+        g3,
+      </if>
+      <if test="g4 != null">
+        g4,
+      </if>
+      <if test="h1 != null">
+        h1,
+      </if>
+      <if test="h2 != null">
+        h2,
+      </if>
+      <if test="h3 != null">
+        h3,
+      </if>
+      <if test="h4 != null">
+        h4,
+      </if>
+      <if test="i1 != null">
+        i1,
+      </if>
+      <if test="i2 != null">
+        i2,
+      </if>
+      <if test="i3 != null">
+        i3,
+      </if>
+      <if test="i4 != null">
+        i4,
+      </if>
+      <if test="j1 != null">
+        j1,
+      </if>
+      <if test="j2 != null">
+        j2,
+      </if>
+      <if test="j3 != null">
+        j3,
+      </if>
+      <if test="j4 != null">
+        j4,
+      </if>
+      <if test="k1 != null">
+        k1,
+      </if>
+      <if test="k2 != null">
+        k2,
+      </if>
+      <if test="k3 != null">
+        k3,
+      </if>
+      <if test="k4 != null">
+        k4,
+      </if>
+      <if test="l1 != null">
+        l1,
+      </if>
+      <if test="l2 != null">
+        l2,
+      </if>
+      <if test="l3 != null">
+        l3,
+      </if>
+      <if test="l4 != null">
+        l4,
+      </if>
+      <if test="m1 != null">
+        m1,
+      </if>
+      <if test="m2 != null">
+        m2,
+      </if>
+      <if test="m3 != null">
+        m3,
+      </if>
+      <if test="m4 != null">
+        m4,
+      </if>
+      <if test="n1 != null">
+        n1,
+      </if>
+      <if test="n2 != null">
+        n2,
+      </if>
+      <if test="n3 != null">
+        n3,
+      </if>
+      <if test="n4 != null">
+        n4,
+      </if>
+      <if test="o1 != null">
+        o1,
+      </if>
+      <if test="o2 != null">
+        o2,
+      </if>
+      <if test="o3 != null">
+        o3,
+      </if>
+      <if test="o4 != null">
+        o4,
+      </if>
+      <if test="p1 != null">
+        p1,
+      </if>
+      <if test="p2 != null">
+        p2,
+      </if>
+      <if test="p3 != null">
+        p3,
+      </if>
+      <if test="p4 != null">
+        p4,
+      </if>
+      <if test="q1 != null">
+        q1,
+      </if>
+      <if test="q2 != null">
+        q2,
+      </if>
+      <if test="q3 != null">
+        q3,
+      </if>
+      <if test="q4 != null">
+        q4,
+      </if>
+      <if test="r1 != null">
+        r1,
+      </if>
+      <if test="r2 != null">
+        r2,
+      </if>
+      <if test="r3 != null">
+        r3,
+      </if>
+      <if test="r4 != null">
+        r4,
+      </if>
+      <if test="s1 != null">
+        s1,
+      </if>
+      <if test="s2 != null">
+        s2,
+      </if>
+      <if test="s3 != null">
+        s3,
+      </if>
+      <if test="s4 != null">
+        s4,
+      </if>
+      <if test="t1 != null">
+        t1,
+      </if>
+      <if test="t2 != null">
+        t2,
+      </if>
+      <if test="t3 != null">
+        t3,
+      </if>
+      <if test="t4 != null">
+        t4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ti != null">
+        #{ti,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a1 != null">
+        #{a1,jdbcType=REAL},
+      </if>
+      <if test="a2 != null">
+        #{a2,jdbcType=REAL},
+      </if>
+      <if test="a3 != null">
+        #{a3,jdbcType=REAL},
+      </if>
+      <if test="a4 != null">
+        #{a4,jdbcType=REAL},
+      </if>
+      <if test="b1 != null">
+        #{b1,jdbcType=REAL},
+      </if>
+      <if test="b2 != null">
+        #{b2,jdbcType=REAL},
+      </if>
+      <if test="b3 != null">
+        #{b3,jdbcType=REAL},
+      </if>
+      <if test="b4 != null">
+        #{b4,jdbcType=REAL},
+      </if>
+      <if test="c1 != null">
+        #{c1,jdbcType=REAL},
+      </if>
+      <if test="c2 != null">
+        #{c2,jdbcType=REAL},
+      </if>
+      <if test="c3 != null">
+        #{c3,jdbcType=REAL},
+      </if>
+      <if test="c4 != null">
+        #{c4,jdbcType=REAL},
+      </if>
+      <if test="d1 != null">
+        #{d1,jdbcType=REAL},
+      </if>
+      <if test="d2 != null">
+        #{d2,jdbcType=REAL},
+      </if>
+      <if test="d3 != null">
+        #{d3,jdbcType=REAL},
+      </if>
+      <if test="d4 != null">
+        #{d4,jdbcType=REAL},
+      </if>
+      <if test="e1 != null">
+        #{e1,jdbcType=REAL},
+      </if>
+      <if test="e2 != null">
+        #{e2,jdbcType=REAL},
+      </if>
+      <if test="e3 != null">
+        #{e3,jdbcType=REAL},
+      </if>
+      <if test="e4 != null">
+        #{e4,jdbcType=REAL},
+      </if>
+      <if test="f1 != null">
+        #{f1,jdbcType=REAL},
+      </if>
+      <if test="f2 != null">
+        #{f2,jdbcType=REAL},
+      </if>
+      <if test="f3 != null">
+        #{f3,jdbcType=REAL},
+      </if>
+      <if test="f4 != null">
+        #{f4,jdbcType=REAL},
+      </if>
+      <if test="g1 != null">
+        #{g1,jdbcType=REAL},
+      </if>
+      <if test="g2 != null">
+        #{g2,jdbcType=REAL},
+      </if>
+      <if test="g3 != null">
+        #{g3,jdbcType=REAL},
+      </if>
+      <if test="g4 != null">
+        #{g4,jdbcType=REAL},
+      </if>
+      <if test="h1 != null">
+        #{h1,jdbcType=REAL},
+      </if>
+      <if test="h2 != null">
+        #{h2,jdbcType=REAL},
+      </if>
+      <if test="h3 != null">
+        #{h3,jdbcType=REAL},
+      </if>
+      <if test="h4 != null">
+        #{h4,jdbcType=REAL},
+      </if>
+      <if test="i1 != null">
+        #{i1,jdbcType=REAL},
+      </if>
+      <if test="i2 != null">
+        #{i2,jdbcType=REAL},
+      </if>
+      <if test="i3 != null">
+        #{i3,jdbcType=REAL},
+      </if>
+      <if test="i4 != null">
+        #{i4,jdbcType=REAL},
+      </if>
+      <if test="j1 != null">
+        #{j1,jdbcType=REAL},
+      </if>
+      <if test="j2 != null">
+        #{j2,jdbcType=REAL},
+      </if>
+      <if test="j3 != null">
+        #{j3,jdbcType=REAL},
+      </if>
+      <if test="j4 != null">
+        #{j4,jdbcType=REAL},
+      </if>
+      <if test="k1 != null">
+        #{k1,jdbcType=REAL},
+      </if>
+      <if test="k2 != null">
+        #{k2,jdbcType=REAL},
+      </if>
+      <if test="k3 != null">
+        #{k3,jdbcType=REAL},
+      </if>
+      <if test="k4 != null">
+        #{k4,jdbcType=REAL},
+      </if>
+      <if test="l1 != null">
+        #{l1,jdbcType=REAL},
+      </if>
+      <if test="l2 != null">
+        #{l2,jdbcType=REAL},
+      </if>
+      <if test="l3 != null">
+        #{l3,jdbcType=REAL},
+      </if>
+      <if test="l4 != null">
+        #{l4,jdbcType=REAL},
+      </if>
+      <if test="m1 != null">
+        #{m1,jdbcType=REAL},
+      </if>
+      <if test="m2 != null">
+        #{m2,jdbcType=REAL},
+      </if>
+      <if test="m3 != null">
+        #{m3,jdbcType=REAL},
+      </if>
+      <if test="m4 != null">
+        #{m4,jdbcType=REAL},
+      </if>
+      <if test="n1 != null">
+        #{n1,jdbcType=REAL},
+      </if>
+      <if test="n2 != null">
+        #{n2,jdbcType=REAL},
+      </if>
+      <if test="n3 != null">
+        #{n3,jdbcType=REAL},
+      </if>
+      <if test="n4 != null">
+        #{n4,jdbcType=REAL},
+      </if>
+      <if test="o1 != null">
+        #{o1,jdbcType=REAL},
+      </if>
+      <if test="o2 != null">
+        #{o2,jdbcType=REAL},
+      </if>
+      <if test="o3 != null">
+        #{o3,jdbcType=REAL},
+      </if>
+      <if test="o4 != null">
+        #{o4,jdbcType=REAL},
+      </if>
+      <if test="p1 != null">
+        #{p1,jdbcType=REAL},
+      </if>
+      <if test="p2 != null">
+        #{p2,jdbcType=REAL},
+      </if>
+      <if test="p3 != null">
+        #{p3,jdbcType=REAL},
+      </if>
+      <if test="p4 != null">
+        #{p4,jdbcType=REAL},
+      </if>
+      <if test="q1 != null">
+        #{q1,jdbcType=REAL},
+      </if>
+      <if test="q2 != null">
+        #{q2,jdbcType=REAL},
+      </if>
+      <if test="q3 != null">
+        #{q3,jdbcType=REAL},
+      </if>
+      <if test="q4 != null">
+        #{q4,jdbcType=REAL},
+      </if>
+      <if test="r1 != null">
+        #{r1,jdbcType=REAL},
+      </if>
+      <if test="r2 != null">
+        #{r2,jdbcType=REAL},
+      </if>
+      <if test="r3 != null">
+        #{r3,jdbcType=REAL},
+      </if>
+      <if test="r4 != null">
+        #{r4,jdbcType=REAL},
+      </if>
+      <if test="s1 != null">
+        #{s1,jdbcType=REAL},
+      </if>
+      <if test="s2 != null">
+        #{s2,jdbcType=REAL},
+      </if>
+      <if test="s3 != null">
+        #{s3,jdbcType=REAL},
+      </if>
+      <if test="s4 != null">
+        #{s4,jdbcType=REAL},
+      </if>
+      <if test="t1 != null">
+        #{t1,jdbcType=REAL},
+      </if>
+      <if test="t2 != null">
+        #{t2,jdbcType=REAL},
+      </if>
+      <if test="t3 != null">
+        #{t3,jdbcType=REAL},
+      </if>
+      <if test="t4 != null">
+        #{t4,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.jtableExample" resultType="java.lang.Long">
+    select count(*) from jtable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <!-- 123  -->
+  <select id="selectByDayJTable" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from jtable l where year(l.ti)=#{0} and month(l.ti)=#{1} and day(l.ti)=#{2} order by l.ti asc
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update jtable
+    <set>
+      <if test="record.ti != null">
+        ti = #{record.ti,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a1 != null">
+        a1 = #{record.a1,jdbcType=REAL},
+      </if>
+      <if test="record.a2 != null">
+        a2 = #{record.a2,jdbcType=REAL},
+      </if>
+      <if test="record.a3 != null">
+        a3 = #{record.a3,jdbcType=REAL},
+      </if>
+      <if test="record.a4 != null">
+        a4 = #{record.a4,jdbcType=REAL},
+      </if>
+      <if test="record.b1 != null">
+        b1 = #{record.b1,jdbcType=REAL},
+      </if>
+      <if test="record.b2 != null">
+        b2 = #{record.b2,jdbcType=REAL},
+      </if>
+      <if test="record.b3 != null">
+        b3 = #{record.b3,jdbcType=REAL},
+      </if>
+      <if test="record.b4 != null">
+        b4 = #{record.b4,jdbcType=REAL},
+      </if>
+      <if test="record.c1 != null">
+        c1 = #{record.c1,jdbcType=REAL},
+      </if>
+      <if test="record.c2 != null">
+        c2 = #{record.c2,jdbcType=REAL},
+      </if>
+      <if test="record.c3 != null">
+        c3 = #{record.c3,jdbcType=REAL},
+      </if>
+      <if test="record.c4 != null">
+        c4 = #{record.c4,jdbcType=REAL},
+      </if>
+      <if test="record.d1 != null">
+        d1 = #{record.d1,jdbcType=REAL},
+      </if>
+      <if test="record.d2 != null">
+        d2 = #{record.d2,jdbcType=REAL},
+      </if>
+      <if test="record.d3 != null">
+        d3 = #{record.d3,jdbcType=REAL},
+      </if>
+      <if test="record.d4 != null">
+        d4 = #{record.d4,jdbcType=REAL},
+      </if>
+      <if test="record.e1 != null">
+        e1 = #{record.e1,jdbcType=REAL},
+      </if>
+      <if test="record.e2 != null">
+        e2 = #{record.e2,jdbcType=REAL},
+      </if>
+      <if test="record.e3 != null">
+        e3 = #{record.e3,jdbcType=REAL},
+      </if>
+      <if test="record.e4 != null">
+        e4 = #{record.e4,jdbcType=REAL},
+      </if>
+      <if test="record.f1 != null">
+        f1 = #{record.f1,jdbcType=REAL},
+      </if>
+      <if test="record.f2 != null">
+        f2 = #{record.f2,jdbcType=REAL},
+      </if>
+      <if test="record.f3 != null">
+        f3 = #{record.f3,jdbcType=REAL},
+      </if>
+      <if test="record.f4 != null">
+        f4 = #{record.f4,jdbcType=REAL},
+      </if>
+      <if test="record.g1 != null">
+        g1 = #{record.g1,jdbcType=REAL},
+      </if>
+      <if test="record.g2 != null">
+        g2 = #{record.g2,jdbcType=REAL},
+      </if>
+      <if test="record.g3 != null">
+        g3 = #{record.g3,jdbcType=REAL},
+      </if>
+      <if test="record.g4 != null">
+        g4 = #{record.g4,jdbcType=REAL},
+      </if>
+      <if test="record.h1 != null">
+        h1 = #{record.h1,jdbcType=REAL},
+      </if>
+      <if test="record.h2 != null">
+        h2 = #{record.h2,jdbcType=REAL},
+      </if>
+      <if test="record.h3 != null">
+        h3 = #{record.h3,jdbcType=REAL},
+      </if>
+      <if test="record.h4 != null">
+        h4 = #{record.h4,jdbcType=REAL},
+      </if>
+      <if test="record.i1 != null">
+        i1 = #{record.i1,jdbcType=REAL},
+      </if>
+      <if test="record.i2 != null">
+        i2 = #{record.i2,jdbcType=REAL},
+      </if>
+      <if test="record.i3 != null">
+        i3 = #{record.i3,jdbcType=REAL},
+      </if>
+      <if test="record.i4 != null">
+        i4 = #{record.i4,jdbcType=REAL},
+      </if>
+      <if test="record.j1 != null">
+        j1 = #{record.j1,jdbcType=REAL},
+      </if>
+      <if test="record.j2 != null">
+        j2 = #{record.j2,jdbcType=REAL},
+      </if>
+      <if test="record.j3 != null">
+        j3 = #{record.j3,jdbcType=REAL},
+      </if>
+      <if test="record.j4 != null">
+        j4 = #{record.j4,jdbcType=REAL},
+      </if>
+      <if test="record.k1 != null">
+        k1 = #{record.k1,jdbcType=REAL},
+      </if>
+      <if test="record.k2 != null">
+        k2 = #{record.k2,jdbcType=REAL},
+      </if>
+      <if test="record.k3 != null">
+        k3 = #{record.k3,jdbcType=REAL},
+      </if>
+      <if test="record.k4 != null">
+        k4 = #{record.k4,jdbcType=REAL},
+      </if>
+      <if test="record.l1 != null">
+        l1 = #{record.l1,jdbcType=REAL},
+      </if>
+      <if test="record.l2 != null">
+        l2 = #{record.l2,jdbcType=REAL},
+      </if>
+      <if test="record.l3 != null">
+        l3 = #{record.l3,jdbcType=REAL},
+      </if>
+      <if test="record.l4 != null">
+        l4 = #{record.l4,jdbcType=REAL},
+      </if>
+      <if test="record.m1 != null">
+        m1 = #{record.m1,jdbcType=REAL},
+      </if>
+      <if test="record.m2 != null">
+        m2 = #{record.m2,jdbcType=REAL},
+      </if>
+      <if test="record.m3 != null">
+        m3 = #{record.m3,jdbcType=REAL},
+      </if>
+      <if test="record.m4 != null">
+        m4 = #{record.m4,jdbcType=REAL},
+      </if>
+      <if test="record.n1 != null">
+        n1 = #{record.n1,jdbcType=REAL},
+      </if>
+      <if test="record.n2 != null">
+        n2 = #{record.n2,jdbcType=REAL},
+      </if>
+      <if test="record.n3 != null">
+        n3 = #{record.n3,jdbcType=REAL},
+      </if>
+      <if test="record.n4 != null">
+        n4 = #{record.n4,jdbcType=REAL},
+      </if>
+      <if test="record.o1 != null">
+        o1 = #{record.o1,jdbcType=REAL},
+      </if>
+      <if test="record.o2 != null">
+        o2 = #{record.o2,jdbcType=REAL},
+      </if>
+      <if test="record.o3 != null">
+        o3 = #{record.o3,jdbcType=REAL},
+      </if>
+      <if test="record.o4 != null">
+        o4 = #{record.o4,jdbcType=REAL},
+      </if>
+      <if test="record.p1 != null">
+        p1 = #{record.p1,jdbcType=REAL},
+      </if>
+      <if test="record.p2 != null">
+        p2 = #{record.p2,jdbcType=REAL},
+      </if>
+      <if test="record.p3 != null">
+        p3 = #{record.p3,jdbcType=REAL},
+      </if>
+      <if test="record.p4 != null">
+        p4 = #{record.p4,jdbcType=REAL},
+      </if>
+      <if test="record.q1 != null">
+        q1 = #{record.q1,jdbcType=REAL},
+      </if>
+      <if test="record.q2 != null">
+        q2 = #{record.q2,jdbcType=REAL},
+      </if>
+      <if test="record.q3 != null">
+        q3 = #{record.q3,jdbcType=REAL},
+      </if>
+      <if test="record.q4 != null">
+        q4 = #{record.q4,jdbcType=REAL},
+      </if>
+      <if test="record.r1 != null">
+        r1 = #{record.r1,jdbcType=REAL},
+      </if>
+      <if test="record.r2 != null">
+        r2 = #{record.r2,jdbcType=REAL},
+      </if>
+      <if test="record.r3 != null">
+        r3 = #{record.r3,jdbcType=REAL},
+      </if>
+      <if test="record.r4 != null">
+        r4 = #{record.r4,jdbcType=REAL},
+      </if>
+      <if test="record.s1 != null">
+        s1 = #{record.s1,jdbcType=REAL},
+      </if>
+      <if test="record.s2 != null">
+        s2 = #{record.s2,jdbcType=REAL},
+      </if>
+      <if test="record.s3 != null">
+        s3 = #{record.s3,jdbcType=REAL},
+      </if>
+      <if test="record.s4 != null">
+        s4 = #{record.s4,jdbcType=REAL},
+      </if>
+      <if test="record.t1 != null">
+        t1 = #{record.t1,jdbcType=REAL},
+      </if>
+      <if test="record.t2 != null">
+        t2 = #{record.t2,jdbcType=REAL},
+      </if>
+      <if test="record.t3 != null">
+        t3 = #{record.t3,jdbcType=REAL},
+      </if>
+      <if test="record.t4 != null">
+        t4 = #{record.t4,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jtable
+    set ti = #{record.ti,jdbcType=TIMESTAMP},
+      a1 = #{record.a1,jdbcType=REAL},
+      a2 = #{record.a2,jdbcType=REAL},
+      a3 = #{record.a3,jdbcType=REAL},
+      a4 = #{record.a4,jdbcType=REAL},
+      b1 = #{record.b1,jdbcType=REAL},
+      b2 = #{record.b2,jdbcType=REAL},
+      b3 = #{record.b3,jdbcType=REAL},
+      b4 = #{record.b4,jdbcType=REAL},
+      c1 = #{record.c1,jdbcType=REAL},
+      c2 = #{record.c2,jdbcType=REAL},
+      c3 = #{record.c3,jdbcType=REAL},
+      c4 = #{record.c4,jdbcType=REAL},
+      d1 = #{record.d1,jdbcType=REAL},
+      d2 = #{record.d2,jdbcType=REAL},
+      d3 = #{record.d3,jdbcType=REAL},
+      d4 = #{record.d4,jdbcType=REAL},
+      e1 = #{record.e1,jdbcType=REAL},
+      e2 = #{record.e2,jdbcType=REAL},
+      e3 = #{record.e3,jdbcType=REAL},
+      e4 = #{record.e4,jdbcType=REAL},
+      f1 = #{record.f1,jdbcType=REAL},
+      f2 = #{record.f2,jdbcType=REAL},
+      f3 = #{record.f3,jdbcType=REAL},
+      f4 = #{record.f4,jdbcType=REAL},
+      g1 = #{record.g1,jdbcType=REAL},
+      g2 = #{record.g2,jdbcType=REAL},
+      g3 = #{record.g3,jdbcType=REAL},
+      g4 = #{record.g4,jdbcType=REAL},
+      h1 = #{record.h1,jdbcType=REAL},
+      h2 = #{record.h2,jdbcType=REAL},
+      h3 = #{record.h3,jdbcType=REAL},
+      h4 = #{record.h4,jdbcType=REAL},
+      i1 = #{record.i1,jdbcType=REAL},
+      i2 = #{record.i2,jdbcType=REAL},
+      i3 = #{record.i3,jdbcType=REAL},
+      i4 = #{record.i4,jdbcType=REAL},
+      j1 = #{record.j1,jdbcType=REAL},
+      j2 = #{record.j2,jdbcType=REAL},
+      j3 = #{record.j3,jdbcType=REAL},
+      j4 = #{record.j4,jdbcType=REAL},
+      k1 = #{record.k1,jdbcType=REAL},
+      k2 = #{record.k2,jdbcType=REAL},
+      k3 = #{record.k3,jdbcType=REAL},
+      k4 = #{record.k4,jdbcType=REAL},
+      l1 = #{record.l1,jdbcType=REAL},
+      l2 = #{record.l2,jdbcType=REAL},
+      l3 = #{record.l3,jdbcType=REAL},
+      l4 = #{record.l4,jdbcType=REAL},
+      m1 = #{record.m1,jdbcType=REAL},
+      m2 = #{record.m2,jdbcType=REAL},
+      m3 = #{record.m3,jdbcType=REAL},
+      m4 = #{record.m4,jdbcType=REAL},
+      n1 = #{record.n1,jdbcType=REAL},
+      n2 = #{record.n2,jdbcType=REAL},
+      n3 = #{record.n3,jdbcType=REAL},
+      n4 = #{record.n4,jdbcType=REAL},
+      o1 = #{record.o1,jdbcType=REAL},
+      o2 = #{record.o2,jdbcType=REAL},
+      o3 = #{record.o3,jdbcType=REAL},
+      o4 = #{record.o4,jdbcType=REAL},
+      p1 = #{record.p1,jdbcType=REAL},
+      p2 = #{record.p2,jdbcType=REAL},
+      p3 = #{record.p3,jdbcType=REAL},
+      p4 = #{record.p4,jdbcType=REAL},
+      q1 = #{record.q1,jdbcType=REAL},
+      q2 = #{record.q2,jdbcType=REAL},
+      q3 = #{record.q3,jdbcType=REAL},
+      q4 = #{record.q4,jdbcType=REAL},
+      r1 = #{record.r1,jdbcType=REAL},
+      r2 = #{record.r2,jdbcType=REAL},
+      r3 = #{record.r3,jdbcType=REAL},
+      r4 = #{record.r4,jdbcType=REAL},
+      s1 = #{record.s1,jdbcType=REAL},
+      s2 = #{record.s2,jdbcType=REAL},
+      s3 = #{record.s3,jdbcType=REAL},
+      s4 = #{record.s4,jdbcType=REAL},
+      t1 = #{record.t1,jdbcType=REAL},
+      t2 = #{record.t2,jdbcType=REAL},
+      t3 = #{record.t3,jdbcType=REAL},
+      t4 = #{record.t4,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

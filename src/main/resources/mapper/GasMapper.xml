@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.GasMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Gas">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="wName" jdbcType="VARCHAR" property="wname" />
+    <result column="ch4" jdbcType="FLOAT" property="ch4" />
+    <result column="co2" jdbcType="FLOAT" property="co2" />
+    <result column="o2" jdbcType="FLOAT" property="o2" />
+    <result column="h2s" jdbcType="FLOAT" property="h2s" />
+    <result column="bal" jdbcType="FLOAT" property="bal" />
+    <result column="gTime" jdbcType="TIMESTAMP" property="gtime" />
+    <result column="uName" jdbcType="VARCHAR" property="uname" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="pressure" jdbcType="FLOAT" property="pressure" />
+    <result column="l" jdbcType="FLOAT" property="l" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gid, wName, ch4, co2, o2, h2s, bal, gTime, uName, state, pressure
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.GasExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    gas order by gid DESC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gas
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 通过时间查询 -->
+  <select id="selectGasByTime"  resultMap="BaseResultMap">
+   select 
+   <include refid="Base_Column_List" />
+    from gas where gTime &gt; #{time1} and gTime &lt; #{time2}
+  </select>
+  
+  <select id="selectGasName" resultMap="BaseResultMap">
+	  	select * from gas g where wName=#{string} order by gTime DESC limit 1
+  </select>
+  
+   <select id="selectGasByZone" resultMap="BaseResultMap">
+	  	select * from (select g.wName,max(g.gTime) as gTime from gas g,well w where w.wRegion=#{string} and w.wName=g.wName group by g.wName) as a,gas b where a.wName = b.wName and a.gTime = b.gTime;
+  </select>
+  
+  <!-- 通过时间和名字来查询 七天 -->
+  <select id="getGasWeek"  resultMap="BaseResultMap">
+   select 
+   <include refid="Base_Column_List" />
+    from gas where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= gas.gTime and gas.wName =#{gname} order by gas.gTime asc
+  </select>
+  <!-- 通过时间和名字来查询 一个月-->
+  <select id="getGasMonth"  resultMap="BaseResultMap">
+   select 
+   <include refid="Base_Column_List" />
+    from gas where DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= gas.gTime and gas.wName =#{gname} order by gas.gTime asc
+  </select>
+  
+  
+  <!-- 通过名字查询 -->
+  <select id="selectByUname"  resultMap="BaseResultMap">
+   select 
+   <include refid="Base_Column_List" />
+    from gas where wName=#{val}
+  </select>
+  
+ 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gas
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.GasExample">
+    delete from gas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Gas">
+    insert into gas (gid, wName, ch4, 
+      co2, o2, h2s, bal, 
+      gTime, uName, state, 
+      pressure, l)
+    values (#{gid,jdbcType=INTEGER}, #{wname,jdbcType=VARCHAR}, #{ch4,jdbcType=FLOAT}, 
+      #{co2,jdbcType=FLOAT}, #{o2,jdbcType=FLOAT}, #{h2s,jdbcType=FLOAT}, #{bal,jdbcType=FLOAT}, 
+      #{gtime,jdbcType=TIMESTAMP}, #{uname,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{pressure,jdbcType=FLOAT}, 
+      #{l,jdbcType=FLOAT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Gas">
+    insert into gas
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        gid,
+      </if>
+      <if test="wname != null">
+        wName,
+      </if>
+      <if test="ch4 != null">
+        ch4,
+      </if>
+      <if test="co2 != null">
+        co2,
+      </if>
+      <if test="o2 != null">
+        o2,
+      </if>
+      <if test="h2s != null">
+        h2s,
+      </if>
+      <if test="bal != null">
+        bal,
+      </if>
+      <if test="gtime != null">
+        gTime,
+      </if>
+      <if test="uname != null">
+        uName,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="pressure != null">
+        pressure,
+      </if>
+      <if test="l != null">
+        l,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="wname != null">
+        #{wname,jdbcType=VARCHAR},
+      </if>
+      <if test="ch4 != null">
+        #{ch4,jdbcType=FLOAT},
+      </if>
+      <if test="co2 != null">
+        #{co2,jdbcType=FLOAT},
+      </if>
+      <if test="o2 != null">
+        #{o2,jdbcType=FLOAT},
+      </if>
+      <if test="h2s != null">
+        #{h2s,jdbcType=FLOAT},
+      </if>
+      <if test="bal != null">
+        #{bal,jdbcType=FLOAT},
+      </if>
+      <if test="gtime != null">
+        #{gtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pressure != null">
+        #{pressure,jdbcType=FLOAT},
+      </if>
+      <if test="l != null">
+        #{l,jdbcType=FLOAT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.GasExample" resultType="java.lang.Long">
+    select count(*) from gas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gas
+    <set>
+      <if test="record.gid != null">
+        gid = #{record.gid,jdbcType=INTEGER},
+      </if>
+      <if test="record.wname != null">
+        wName = #{record.wname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ch4 != null">
+        ch4 = #{record.ch4,jdbcType=FLOAT},
+      </if>
+      <if test="record.co2 != null">
+        co2 = #{record.co2,jdbcType=FLOAT},
+      </if>
+      <if test="record.o2 != null">
+        o2 = #{record.o2,jdbcType=FLOAT},
+      </if>
+      <if test="record.h2s != null">
+        h2s = #{record.h2s,jdbcType=FLOAT},
+      </if>
+      <if test="record.bal != null">
+        bal = #{record.bal,jdbcType=FLOAT},
+      </if>
+      <if test="record.gtime != null">
+        gTime = #{record.gtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uname != null">
+        uName = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pressure != null">
+        pressure = #{record.pressure,jdbcType=FLOAT},
+      </if>
+      <if test="record.l != null">
+        pressure = #{record.l,jdbcType=FLOAT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gas
+    set gid = #{record.gid,jdbcType=INTEGER},
+      wName = #{record.wname,jdbcType=VARCHAR},
+      ch4 = #{record.ch4,jdbcType=FLOAT},
+      co2 = #{record.co2,jdbcType=FLOAT},
+      o2 = #{record.o2,jdbcType=FLOAT},
+      h2s = #{record.h2s,jdbcType=FLOAT},
+      bal = #{record.bal,jdbcType=FLOAT},
+      gTime = #{record.gtime,jdbcType=TIMESTAMP},
+      uName = #{record.uname,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      pressure = #{record.pressure,jdbcType=FLOAT}
+      l = #{record.l,jdbcType=FLOAT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.Gas">
+    update gas
+    <set>
+      <if test="wname != null">
+        wName = #{wname,jdbcType=VARCHAR},
+      </if>
+      <if test="ch4 != null">
+        ch4 = #{ch4,jdbcType=FLOAT},
+      </if>
+      <if test="co2 != null">
+        co2 = #{co2,jdbcType=FLOAT},
+      </if>
+      <if test="o2 != null">
+        o2 = #{o2,jdbcType=FLOAT},
+      </if>
+      <if test="h2s != null">
+        h2s = #{h2s,jdbcType=FLOAT},
+      </if>
+      <if test="bal != null">
+        bal = #{bal,jdbcType=FLOAT},
+      </if>
+      <if test="gtime != null">
+        gTime = #{gtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uname != null">
+        uName = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pressure != null">
+        pressure = #{pressure,jdbcType=FLOAT},
+      </if>
+      <if test="pressure != null">
+        l = #{l,jdbcType=FLOAT},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.Gas">
+    update gas
+    set wName = #{wname,jdbcType=VARCHAR},
+      ch4 = #{ch4,jdbcType=FLOAT},
+      co2 = #{co2,jdbcType=FLOAT},
+      o2 = #{o2,jdbcType=FLOAT},
+      h2s = #{h2s,jdbcType=FLOAT},
+      bal = #{bal,jdbcType=FLOAT},
+      gTime = #{gtime,jdbcType=TIMESTAMP},
+      uName = #{uname,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      pressure = #{pressure,jdbcType=FLOAT}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>

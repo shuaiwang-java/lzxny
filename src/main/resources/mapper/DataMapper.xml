@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.LzxnyMapper">
+	<!-- 返回结果 -->
+  <resultMap id="BaseResultMap" type="com.bean.Lzxny">
+    <result column="a11" jdbcType="REAL" property="ch4" />
+    <result column="a12" jdbcType="REAL" property="o2" />
+    <result column="a144" jdbcType="REAL" property="kpa" />
+    <result column="a76" jdbcType="REAL" property="hz1" />
+    <result column="a79" jdbcType="REAL" property="hz2" />
+  </resultMap>
+  
+  <select id="getch2" resultMap="BaseResultMap">
+  	 select a11,a12,a144,a76,a79 from lzxny order by id DESC limit 1 
+  </select>
+  
+  <delete id="deleteAll">
+		truncate table lzxny
+  </delete>
+  
+  
+</mapper>
